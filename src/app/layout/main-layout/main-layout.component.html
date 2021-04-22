@@ -1,0 +1,37 @@
+<div id="main">
+
+    <ng-container>
+        <ng-container *ngTemplateOutlet="header"></ng-container>
+    </ng-container>
+
+    <div id="container-1" class="container">
+
+        <div id="container-2" class="container">
+
+            <div id="container-3" class="container">
+
+                <router-outlet *ngIf="true"></router-outlet>
+
+                <ng-container>
+                    <ng-container *ngTemplateOutlet="footer"></ng-container>
+                </ng-container>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- HEADER -->
+<ng-template #header>
+    <app-header></app-header>
+</ng-template>
+<!-- / HEADER -->
+
+<!-- FOOTER -->
+<ng-template #footer>
+    <app-footer></app-footer>
+</ng-template>
+<!-- / FOOTER -->

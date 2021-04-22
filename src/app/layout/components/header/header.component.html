@@ -1,0 +1,42 @@
+<mat-toolbar class="mat-elevation-z1">
+
+    <div fxFlex fxFill fxLayout="row" fxLayoutAlign="start center">
+
+        <div fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="start center">
+
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <div>
+                    <img width="50px" class="logo-icon" src="assets/header-logo.png">
+                </div>
+            </div>
+
+        </div>
+
+        <div fxFlex="0 1 auto" fxLayout="row" fxLayoutAlign="start center">
+
+            <button mat-button [matMenuTriggerFor]="userMenu" class="user-button">
+                <div fxLayout="row" fxLayoutAlign="center center">
+                    <img class="avatar" src="assets/default-profile.svg">
+                    <span fxHide fxShow.gt-sm>{{userName}}</span>
+                    <mat-icon fxHide.xs>keyboard_arrow_down</mat-icon>
+                </div>
+            </button>
+
+            <mat-menu #userMenu="matMenu" [overlapTrigger]="false">
+
+                <button (click)="logout()" mat-menu-item>
+                    <mat-icon>exit_to_app</mat-icon>
+                    <span>Logout</span>
+                </button>
+
+            </mat-menu>
+
+            <button mat-icon-button fxHide fxShow.lt-md>
+                <mat-icon>menu</mat-icon>
+            </button>
+
+        </div>
+
+    </div>
+
+</mat-toolbar>

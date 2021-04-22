@@ -1,0 +1,12 @@
+.align-items-center {
+    background: rgba(39, 95, 173, 0.3411764705882353);
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+.not-found-text {
+    margin-top: 16px;
+    color: #333;
+}
