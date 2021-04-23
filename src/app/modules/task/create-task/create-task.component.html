@@ -1,1 +1,28 @@
-<p>create-task works!</p>
+<form class="create-task-form" fxLayout="column">
+
+    <mat-form-field appearance="fill">
+        <mat-label>Task Title</mat-label>
+        <input matInput value="Title">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Task Description</mat-label>
+        <textarea matInput rows="6"></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Choose due date</mat-label>
+        <input matInput [matDatepicker]="picker">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <div fxLayoutAlign="center center">
+
+        <button [routerLink]="'/task/create'" mat-raised-button color="primary">
+             Save Task
+        </button>
+
+    </div>
+
+</form>

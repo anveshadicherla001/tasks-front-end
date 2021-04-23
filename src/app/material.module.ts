@@ -8,6 +8,10 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatCardModule } from '@angular/material/card';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
     imports: [
@@ -19,7 +23,11 @@ import { MatToolbarModule } from '@angular/material/toolbar';
         MatProgressBarModule,
         MatSnackBarModule,
         MatMenuModule,
-        MatToolbarModule
+        MatToolbarModule,
+        MatPaginatorModule,
+        MatCardModule,
+        MatDatepickerModule,
+        MatNativeDateModule
     ],
     exports: [
         MatButtonModule,
@@ -30,7 +38,11 @@ import { MatToolbarModule } from '@angular/material/toolbar';
         MatProgressBarModule,
         MatSnackBarModule,
         MatMenuModule,
-        MatToolbarModule
+        MatToolbarModule,
+        MatPaginatorModule,
+        MatCardModule,
+        MatDatepickerModule,
+        MatNativeDateModule
     ]
 })
 export class MaterialModule {

@@ -1,1 +1,55 @@
-<p>dashboard works!</p>
+<div id="dashboard">
+    <div id="sub-header" fxLayout="column" fxLayoutAlign="center start">
+        <div class="welcome-text app-white-fg ml-12">
+            Hello, Anvesh Adicherla
+        </div>
+        <p class="m-0 app-white-fg ml-12">
+            Jan 23rd 2021, Tuesday
+        </p>
+    </div>
+    <div id="container" fxLayout="column">
+        <div class="p-16-32" fxLayout="row wrap" fxLayoutAlign="space-between center">
+            <h2 class="m-0">Tasks</h2>
+            <button [routerLink]="'/task/create'" mat-raised-button class="bg-orangered">
+               <mat-icon class="app-white-fg">add</mat-icon> Create Task
+            </button>
+        </div>
+        <div class="tasks-container">
+            <mat-form-field class="w-100">
+                <mat-label>Search For Task</mat-label>
+                <input matInput (keyup)="applyFilter($event)" placeholder="Eg: UI Design" #input>
+            </mat-form-field>
+            <div fxLayout="row wrap" fxLayoutAlign="end end">
+                <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
+                </mat-paginator>
+            </div>
+            <div class="mt-10 mb-26" fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="20px" fxLayoutGap.lt-sm="0px">
+                <mat-card class="mb-20" *ngFor="let task of tasksList; let i=index;" fxFlex="0 1 calc(100% - 0px)" fxFlex.md="0 1 calc(50% - 20px)" fxFlex.gt-xs="0 1 calc(50% - 20px)"
+             fxFlex.lg="0 1 calc(25% - 20px)" fxFlex.gt-lg="0 1 calc(25% - 20px)" [ngClass.gt-sm]="{ 'mr-20': i==tasksList.length-1 }">
+                    
+                    <div fxLayoutAlign="end end">
+                        <mat-icon class="font-size-16" fxLayoutAlign="center center">timer</mat-icon> 
+                        <span class="expiry-time">In 4 Days</span>
+                    </div>
+                    <h3 class="text-capitalize">{{task.title}}</h3>
+                    <p class="task-description">
+                        {{task.description}}
+                    </p>
+                    <mat-card-actions fxLayout="row wrap" fxLayoutAlign="space-between center">
+                        <div fxLayout="row wrap">
+                            <div class="mini-avatar bg-dark-blue" fxLayoutAlign="center center">
+                                A
+                            </div>
+                            <div class="mini-avatar bg-dark-gray position-relative t-8" fxLayoutAlign="center center">
+                                S
+                            </div>
+                        </div>
+                        <button mat-icon-button>
+                            <mat-icon>arrow_right</mat-icon>
+                        </button>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>
