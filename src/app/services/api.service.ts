@@ -23,7 +23,11 @@ export class ApiService {
   setMapping() {
 
     this.modelMapping = {
-      LOGIN: { baseUrl: 'API', endPoint: 'signin' }
+      LOGIN: { baseUrl: 'API', endPoint: 'signin' },
+      SEARCH_TASK: { baseUrl: 'API', endPoint: 'tasks/search' },
+      CREATE_TASK: { baseUrl: 'API', endPoint: 'tasks' },
+      SEARCH_USER: { baseUrl: 'API', endPoint: 'users/search' },
+      TASK_COUNT:  { baseUrl: 'API', endPoint: 'tasks/count' }
     };
 
   }

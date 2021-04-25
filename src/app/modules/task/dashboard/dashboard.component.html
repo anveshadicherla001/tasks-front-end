@@ -1,10 +1,10 @@
 <div id="dashboard">
     <div id="sub-header" fxLayout="column" fxLayoutAlign="center start">
         <div class="welcome-text app-white-fg ml-12">
-            Hello, Anvesh Adicherla
+            {{userName}}
         </div>
         <p class="m-0 app-white-fg ml-12">
-            Jan 23rd 2021, Tuesday
+            {{currentDate}}
         </p>
     </div>
     <div id="container" fxLayout="column">
@@ -17,38 +17,45 @@
         <div class="tasks-container">
             <mat-form-field class="w-100">
                 <mat-label>Search For Task</mat-label>
-                <input matInput (keyup)="applyFilter($event)" placeholder="Eg: UI Design" #input>
+                <input [(ngModel)]="searchText" matInput (keyup)="search($event)" placeholder="Eg: UI Design" #input>
             </mat-form-field>
             <div fxLayout="row wrap" fxLayoutAlign="end end">
-                <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
+                <mat-paginator (page)="pageChange($event)" [length]="pageEventObj.length" [pageSize]="pageEventObj.pageSize" [pageSizeOptions]="[10, 25, 100]">
                 </mat-paginator>
             </div>
             <div class="mt-10 mb-26" fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="20px" fxLayoutGap.lt-sm="0px">
-                <mat-card class="mb-20" *ngFor="let task of tasksList; let i=index;" fxFlex="0 1 calc(100% - 0px)" fxFlex.md="0 1 calc(50% - 20px)" fxFlex.gt-xs="0 1 calc(50% - 20px)"
+                <mat-card (click)="viewTask(task)" class="mb-20 cursor-pointer" *ngFor="let task of tasksList; let i=index;" fxFlex="0 1 calc(100% - 0px)" fxFlex.md="0 1 calc(50% - 20px)" fxFlex.gt-xs="0 1 calc(50% - 20px)"
              fxFlex.lg="0 1 calc(25% - 20px)" fxFlex.gt-lg="0 1 calc(25% - 20px)" [ngClass.gt-sm]="{ 'mr-20': i==tasksList.length-1 }">
                     
                     <div fxLayoutAlign="end end">
                         <mat-icon class="font-size-16" fxLayoutAlign="center center">timer</mat-icon> 
-                        <span class="expiry-time">In 4 Days</span>
+                        <span class="expiry-time" [matTooltip]="moment(task.due_date).format('LL')">{{moment(task.due_date).fromNow()}}</span>
                     </div>
-                    <h3 class="text-capitalize">{{task.title}}</h3>
+                    <h3 class="text-capitalize mt-10">{{task.title | slice:0:32}}<span *ngIf="task.title.length>32">...</span></h3>
                     <p class="task-description">
-                        {{task.description}}
+                        {{task.description | slice:0:40}}<span *ngIf="task.title.length>40">...</span>
                     </p>
                     <mat-card-actions fxLayout="row wrap" fxLayoutAlign="space-between center">
                         <div fxLayout="row wrap">
-                            <div class="mini-avatar bg-dark-blue" fxLayoutAlign="center center">
-                                A
+                            <div matTooltip="{{task.name}} <{{task.created_by_email}}>" matTooltipPosition="above" class="mini-avatar bg-dark-blue" fxLayoutAlign="center center">
+                                {{task.created_by_name[0]}}
                             </div>
-                            <div class="mini-avatar bg-dark-gray position-relative t-8" fxLayoutAlign="center center">
-                                S
+                            <div matTooltip="{{task.created_by_name}} <{{task.email}}>" matTooltipPosition="above" class="mini-avatar bg-dark-gray position-relative t-8" fxLayoutAlign="center center">
+                                {{task.name[0]}}
                             </div>
                         </div>
-                        <button mat-icon-button>
+                        <button matTooltip="View Task" matTooltipPosition="above" mat-icon-button>
                             <mat-icon>arrow_right</mat-icon>
                         </button>
                     </mat-card-actions>
                 </mat-card>
+                <div *ngIf="!dataLoaded" fxLayoutAlign="center center" fxLayout="column">
+                    <h2>Fetching Tasks...</h2>
+                </div>
+                <div *ngIf="dataLoaded && !tasksList.length" fxLayoutAlign="center center" fxLayout="column">
+                    <img width="200px" src="assets/no_data.svg">
+                    <h4 class="mt-24 gray-color">No Tasks Found !</h4>
+                </div>
             </div>
         </div>
     </div>

@@ -1,0 +1,23 @@
+<mat-dialog-content class="mat-typography">
+    <h3>{{dialogData.title}}</h3>
+    <div class="description-bg">
+        {{dialogData.description}}
+    </div>
+    <div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutGap.lt-sm="0px">
+        <div fxLayout="column" fxFlex.gt-sm="0 1 calc(33.33% - 20px)" fxFlex.lt-md="0 1 calc(100% - 0px)">
+            <p>Task Created By :</p>
+            <p class="font-size-10">{{dialogData.created_by_name}} <{{dialogData.created_by_email}}></p>
+        </div>
+        <div fxLayout="column" fxFlex.gt-sm="0 1 calc(33.33% - 20px)" fxFlex.lt-md="0 1 calc(100% - 0px)">
+            <p>Task Assigned To :</p>
+            <p class="font-size-10">{{dialogData.name}} <{{dialogData.email}}></p>
+        </div>
+        <div fxLayout="column" fxFlex.gt-sm="0 1 calc(33.33% - 0px)" fxFlex.lt-md="0 1 calc(100% - 0px)">
+            <p>Due Date :</p>
+            <p class="font-size-10">{{moment(dialogData.due_date).format('LL')}}</p>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>

@@ -1,0 +1,19 @@
+app-view-task {
+    
+    .mat-dialog-content {
+        @media only screen and (max-width: 400px){
+           min-width: 100vw !important;
+        }
+        min-width: 60vw !important;
+    }
+    .description-bg {
+        margin-bottom: 24px;
+        padding: 10px 12px;
+        background: #e5f3ff;
+        border-radius: 5px;
+    }
+    .font-size-10 {
+        font-size: 10px;
+    }
+
+}

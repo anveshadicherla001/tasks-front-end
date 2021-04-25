@@ -12,6 +12,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatCardModule } from '@angular/material/card';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
     imports: [
@@ -27,7 +30,10 @@ import { MatNativeDateModule } from '@angular/material/core';
         MatPaginatorModule,
         MatCardModule,
         MatDatepickerModule,
-        MatNativeDateModule
+        MatNativeDateModule,
+        MatAutocompleteModule,
+        MatTooltipModule,
+        MatDialogModule
     ],
     exports: [
         MatButtonModule,
@@ -42,7 +48,10 @@ import { MatNativeDateModule } from '@angular/material/core';
         MatPaginatorModule,
         MatCardModule,
         MatDatepickerModule,
-        MatNativeDateModule
+        MatNativeDateModule,
+        MatAutocompleteModule,
+        MatTooltipModule,
+        MatDialogModule
     ]
 })
 export class MaterialModule {

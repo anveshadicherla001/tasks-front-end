@@ -12,6 +12,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { LayoutModule } from 'src/app/layout/layout.module';
 
+import { HeadersInterceptorService } from './headers-interceptor.service';
+import { ErrorHandlerInterceptorService } from './error-handler-interceptor.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +29,10 @@ import { LayoutModule } from 'src/app/layout/layout.module';
     MatSnackBarModule,
     LayoutModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: HeadersInterceptorService, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorHandlerInterceptorService, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

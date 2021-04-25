@@ -1,28 +1,59 @@
-<form class="create-task-form" fxLayout="column">
+<div id="create-task">
 
-    <mat-form-field appearance="fill">
-        <mat-label>Task Title</mat-label>
-        <input matInput value="Title">
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
-        <mat-label>Task Description</mat-label>
-        <textarea matInput rows="6"></textarea>
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
-        <mat-label>Choose due date</mat-label>
-        <input matInput [matDatepicker]="picker">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-
-    <div fxLayoutAlign="center center">
-
-        <button [routerLink]="'/task/create'" mat-raised-button color="primary">
-             Save Task
+    <div class="title">
+        <button (click)="goBack()" mat-icon-button color="primary">
+            <mat-icon>arrow_back</mat-icon>
         </button>
-
+        <span class="span-text">Create a Task</span>
     </div>
 
-</form>
+    <form class="create-task-form" fxLayout="column" [formGroup]="createTaskForm">
+
+        <mat-form-field appearance="fill">
+            <mat-label>Task Title</mat-label>
+            <input #taskTitleText matInput formControlName="title" name="title" maxlength="100">
+            <mat-error *ngIf="createTaskForm.controls['title'].errors?.required">Task title required</mat-error>
+            <mat-error *ngIf="createTaskForm.controls['title'].errors?.pattern">Please enter valid text</mat-error>
+            <mat-hint align="end">{{taskTitleText.value.length}}/100</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Task Description</mat-label>
+            <textarea #taskDesc matInput rows="6" formControlName="description" name="description" maxlength="1000"></textarea>
+            <mat-error *ngIf="createTaskForm.controls['description'].errors?.required">Task description required</mat-error>
+            <mat-error *ngIf="createTaskForm.controls['description'].errors?.pattern">Please enter valid text</mat-error>
+            <mat-hint align="end">{{taskDesc.value.length}}/1000</mat-hint>
+        </mat-form-field>
+
+        <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutAlign="flex-start">
+            <mat-form-field class="mb-0" appearance="fill" fxFlex="0 1 calc(50% - 20px)" fxFlex.lt-md="0 1 calc(50% - 20px)">
+                <mat-label>Choose due date</mat-label>
+                <input [min]="minDate" [max]="maxDate" formControlName="due_date" name="duedate" matInput [matDatepicker]="picker">
+                <mat-error>Task due date required</mat-error>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field appearance="fill" fxFlex="0 1 calc(50% - 0px)" fxFlex.lt-md="0 1 calc(50% - 0px)">
+                <mat-label>Assign To User</mat-label>
+                <input (input)="searchUsers($event)" type="text" placeholder="Search for user..." aria-label="Number" matInput [formControl]="userCtrl"
+                    [matAutocomplete]="auto">
+                <mat-error>User selection required</mat-error>
+                <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let option of filteredOptions" (onSelectionChange)="onUserSelection(option)" value="{{option.name}} <{{option.email}}>">
+                        {{option.name}} <{{option.email}}>
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+        </div>
+        
+
+        <div fxLayoutAlign="center center">
+
+            <button [disabled]="createTaskForm.invalid || userCtrl.invalid || !selectedUser" (click)="saveTask()" mat-raised-button color="primary">
+                Save Task
+            </button>
+
+        </div>
+
+    </form>
+</div>

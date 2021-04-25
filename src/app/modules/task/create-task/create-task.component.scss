@@ -1,6 +1,26 @@
 app-create-task {
     height: 100vh;
-    .create-task-form {
-        padding: 32px;
+    #create-task {
+        .title {
+            padding: 0px 24px;
+            margin-top: 24px;
+            margin-bottom: 0px;
+            .span-text {
+                margin-left: 10px;
+                font-size: 20px;
+                position: relative;
+                top: 2px;
+                font-weight: 500;
+            }
+        }
+        .create-task-form {
+            padding: 32px;
+        }
+        .mb-0 {
+            margin-bottom: 0px !important;
+        }
+        .mat-form-field {
+            margin-bottom: 8px !important;
+        }
     }
 }
